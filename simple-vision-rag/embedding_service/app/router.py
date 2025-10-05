@@ -7,7 +7,7 @@ embedding_router = APIRouter()
 
 
 @embedding_router.post("/embed_images", response_model=ImageResponse)
-def embed_images(
+async def embed_images(
     request: ImageRequest, service: EmbeddingService = Depends(get_embedding_service)
 ) -> ImageResponse:
     embeddings = service.image_request(request.images_base64)
@@ -15,7 +15,7 @@ def embed_images(
 
 
 @embedding_router.post("/embed_query", response_model=TextResponse)
-def embed_query(
+async def embed_query(
     request: TextRequest, service: EmbeddingService = Depends(get_embedding_service)
 ) -> TextResponse:
     embeddings = service.text_request(request.query)
